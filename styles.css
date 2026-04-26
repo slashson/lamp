@@ -64,7 +64,7 @@ body {
 .layer {
   position: absolute;
   inset: 0;
-  background: conic-gradient(from 0deg at 50% 50%,
+  background: conic-gradient(from 0deg at 100% 50%,
       var(--c-dark) 0%,
       var(--c-dark) 49%,
       var(--c-glow) 100%);
