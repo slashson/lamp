@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#010017">
+  <title>Lamp</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-on="true">
+  <div class="screen">
+    <div class="half top">
+      <div class="layer base"></div>
+      <div class="layer glow"></div>
+    </div>
+    <div class="half bottom">
+      <div class="layer base"></div>
+      <div class="layer glow"></div>
+    </div>
+  </div>
+
+  <button class="power" type="button" aria-label="Toggle lamp" aria-pressed="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3v9"/>
+      <path d="M18.36 7.64a9 9 0 1 1-12.73 0"/>
+    </svg>
+  </button>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
