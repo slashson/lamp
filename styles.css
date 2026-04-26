@@ -76,46 +76,105 @@ body {
   mix-blend-mode: screen;
 }
 
-.power {
+.dock {
   position: fixed;
   left: 50%;
-  bottom: max(10vh, env(safe-area-inset-bottom, 0px) + 32px);
+  bottom: max(4vh, env(safe-area-inset-bottom, 0px) + 20px);
   transform: translateX(-50%);
-  width: 72px;
-  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(232, 234, 243, 0.2);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.dock-btn {
+  width: 60px;
+  height: 60px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  color: #fff;
+  background: transparent;
+  padding: 0;
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: transform 180ms ease,
-    background 500ms ease,
-    color 500ms ease;
+  transition: transform 180ms ease, background 300ms ease;
 }
 
-.power:active {
-  transform: translateX(-50%) scale(0.93);
+.dock-btn.power {
+  background: rgba(232, 234, 243, 0.2);
 }
 
-.power svg {
-  width: 28px;
-  height: 28px;
-  display: block;
+.dock-btn:active { transform: scale(0.92); }
+
+.dock-btn svg { display: block; }
+
+.brightness-wrap {
+  position: relative;
+  display: flex;
+  isolation: isolate;
 }
 
-body[data-on="false"] .power {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.55);
+.slider {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 76px;
+  height: 280px;
+  padding: 6px;
+  border-radius: 38px;
+  background: rgba(232, 234, 243, 0.2);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  transform-origin: bottom center;
+  transform: translateX(-50%) scaleY(0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 280ms cubic-bezier(.22,.61,.36,1),
+              opacity   220ms ease;
+  z-index: 1;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.slider[data-open="true"] {
+  transform: translateX(-50%) scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slider-fill {
+  --level: 0.6;
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  height: calc((100% - 12px) * var(--level));
+  background: rgba(232, 234, 243, 0.69);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  transition: height 80ms linear;
+  pointer-events: none;
+}
+
+.slider[data-open="true"] ~ .brightness {
+  pointer-events: none;
+}
+
+.slider[data-open="true"] ~ .brightness svg {
+  mix-blend-mode: difference;
+  position: relative;
+  z-index: 2;
 }
 
 @media (prefers-reduced-motion: reduce) {
 
   .layer,
-  .power {
+  .dock-btn {
     transition-duration: 0ms;
   }
 }
